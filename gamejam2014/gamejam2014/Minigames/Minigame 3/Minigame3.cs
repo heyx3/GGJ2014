@@ -80,7 +80,7 @@ namespace gamejam2014.Minigames.Minigame_3
             }
             wasInHill = HarmonyInsideHill;
 
-            if (HarmonyInsideHill && !HillShape.Touches(Dischord.ColShape))
+            if (HarmonyInsideHill)
             {
                 TimeInHill += (float)World.CurrentTime.ElapsedGameTime.TotalSeconds;
             }

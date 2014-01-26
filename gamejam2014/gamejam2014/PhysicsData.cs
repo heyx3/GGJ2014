@@ -23,7 +23,7 @@ namespace gamejam2014
         };
         public static Dictionary<ZoomLevels, JousterPhysicsData> DischordSpecialPhysics = new Dictionary<ZoomLevels, JousterPhysicsData>()
         {
-            { ZoomLevels.Three, new JousterPhysicsData(ZoomLevels.Three, 1000.0f, 4.0f, 1200.0f, 800.0f, 0.85f) },
+            { ZoomLevels.Three, new JousterPhysicsData(ZoomLevels.Three, 1000.0f, 4.0f, 1100.0f, 800.0f, 0.85f) },
         };
 
         public static Dictionary<ZoomLevels, float> JousterStartingMass = new Dictionary<ZoomLevels, float>()
@@ -67,7 +67,7 @@ namespace gamejam2014
             return new Interval(-0.5f, maxSpeed, true, 2).Map(Interval.ZeroToOneInterval, stabDamage);
         }
 
-        private static Interval RelativeHitDamageRange = new Interval(0.0f, 2000.0f, true, 1);
+        private static Interval RelativeHitDamageRange = new Interval(0.0f, 2500.0f, true, 1);
         private static float MaxDamageFromHit = 0.5f;
         public static float GetDamage(float stabStrength, float zoomScale)
         {

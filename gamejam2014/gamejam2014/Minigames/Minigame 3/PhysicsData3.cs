@@ -12,7 +12,7 @@ namespace gamejam2014.Minigames.Minigame_3
         private static V2 HillCenter = new V2(-47.5f, 80.0f);
         public static Circle GetHillCircle(float zoomScale) { return new Circle(HillCenter * zoomScale, ArtAssets3.HillRadius * zoomScale); }
 
-        public static float TimeInHillToWin = 60.0f;
+        public static float TimeInHillToWin = 30.0f;
 
         private static V2 DoghouseCenter = new V2(-47.5f, -105);
         public static V2 GetDoghouseCenter(float zoomScale) { return zoomScale * DoghouseCenter; }

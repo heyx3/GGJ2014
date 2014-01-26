@@ -140,8 +140,8 @@ namespace gamejam2014
             Timers = new Utilities.TimerManager();
             Input = new ButtonInputManager();
 
-            Input.AddInput("Zoom In", new KeyboardButton(Keys.PageUp, true));
-            Input.AddInput("Zoom Out", new KeyboardButton(Keys.PageDown, true));
+            Input.AddInput("Zoom In", new ComboButton(new KeyboardButton(Keys.LeftControl, false), new KeyboardButton(Keys.PageUp, true)));
+            Input.AddInput("Zoom Out", new ComboButton(new KeyboardButton(Keys.LeftControl, false), new KeyboardButton(Keys.PageDown, true)));
 
             CurrentTime = new GameTime(TimeSpan.Zero, TimeSpan.Zero);
 
@@ -165,9 +165,6 @@ namespace gamejam2014
 
         public void Update(GameTime gt)
         {
-            if (KS.IsKeyDown(Keys.G)) Special = 1.0f;
-
-
             CurrentTime = gt;
 
             Timers.Update(gt);
@@ -236,8 +233,8 @@ namespace gamejam2014
             foreach (Utilities.Graphics.AnimatedSprite sprite in ArtAssets.SpecialUIAlert.Values)
                 sprite.UpdateAnimation(gt);
 
-            if (Input.GetBoolInput("Zoom In").Value) CurrentZoom = WorldData.ZoomIn(CurrentZoom);
-            if (Input.GetBoolInput("Zoom Out").Value) CurrentZoom = WorldData.ZoomOut(CurrentZoom);
+            //if (Input.GetBoolInput("Zoom In").Value) CurrentZoom = WorldData.ZoomIn(CurrentZoom);
+            //if (Input.GetBoolInput("Zoom Out").Value) CurrentZoom = WorldData.ZoomOut(CurrentZoom);
 
             if (Special == 1.0f)
             {
