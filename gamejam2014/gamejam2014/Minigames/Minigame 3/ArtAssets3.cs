@@ -53,9 +53,9 @@ namespace gamejam2014.Minigames.Minigame_3
             ConfusedSprite.StartAnimation();
 
             DogHouseSprite = new AnimatedSprite(content.Load<Texture2D>("Art/Z3 Art/doghouse"));
-            DogHouseSprite.DrawArgs.Origin = new V2(175, 231);
+            DogHouseSprite.SetOriginToCenter();
             DogHouseLowerSprite = new AnimatedSprite(content.Load<Texture2D>("Art/Z3 Art/doghouse lower"));
-            DogHouseLowerSprite.DrawArgs.Origin = new V2(175, 231);
+            DogHouseLowerSprite.SetOriginToCenter();
 
             HarmonyJousterStill = new AnimatedSprite(content.Load<Texture2D>("Art/Z3 Art/dog_still"), 8, TimeSpan.FromSeconds(0.1), true);
             HarmonyJousterStill.SetOriginToCenter();

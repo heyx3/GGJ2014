@@ -13,11 +13,11 @@ namespace gamejam2014.Minigames.Minigame_5
 
         public static void PlayRandomCollision()
         {
-            Collisions[Utilities.Math.UsefulMath.Random(0, Collisions.Count - 1)].CreateInstance().Play();
+            Collisions[Utilities.Math.UsefulMath.Random(0, Collisions.Count - 1)].Play();
         }
         public static void PlayRandomProjectileHit()
         {
-            ProjectileHits[Utilities.Math.UsefulMath.Random(0, ProjectileHits.Count - 1)].CreateInstance().Play();
+            ProjectileHits[Utilities.Math.UsefulMath.Random(0, ProjectileHits.Count - 1)].Play();
         }
 
 

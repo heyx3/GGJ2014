@@ -21,8 +21,18 @@ namespace gamejam2014
 
         KarmaWorld world;
 
-        private bool paused = false;
-        private bool escapeDown = false;
+        private bool buttonDown = false;
+
+
+        public enum States
+        {
+            Paused,
+            Playing,
+
+            MainMenu,
+            Instructions,
+        }
+        public States current = States.Playing;
 
 
         public Game1()
@@ -95,25 +105,58 @@ namespace gamejam2014
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (paused)
+            if (current != States.Playing)
             {
                 world.KS = Keyboard.GetState();
             }
-            else
-            {
-                world.Update(gameTime);
-            }
 
-
-            if (world.KS.IsKeyDown(Keys.Escape))
+            switch (current)
             {
-                if (!escapeDown)
-                {
-                    paused = !paused;
-                    escapeDown = true;
-                }
+                case States.Playing:
+                    world.Update(gameTime);
+                    if (!buttonDown && world.KS.IsKeyDown(Keys.Escape))
+                    {
+                        current = States.Paused;
+                        buttonDown = true;
+                    }
+                    else buttonDown = false;
+                    break;
+                case States.Paused:
+                    if (!buttonDown && world.KS.IsKeyDown(Keys.Escape))
+                    {
+                        current = States.Playing;
+                        buttonDown = true;
+                    }
+                    else buttonDown = false;
+                    break;
+                case States.MainMenu:
+                    if (!buttonDown && world.KS.IsKeyDown(Keys.Enter))
+                    {
+                        current = States.Playing;
+                        buttonDown = true;
+                    }
+                    else if (!buttonDown && world.KS.IsKeyDown(Keys.Escape))
+                    {
+                        Exit();
+                    }
+                    else if (!buttonDown && world.KS.IsKeyDown(Keys.Space))
+                    {
+                        current = States.Instructions;
+                        buttonDown = true;
+                    }
+                    else buttonDown = false;
+                    break;
+                case States.Instructions:
+                    if (!buttonDown && world.KS.IsKeyDown(Keys.Escape))
+                    {
+                        current = States.MainMenu;
+                        buttonDown = true;
+                    }
+                    else buttonDown = false;
+                    break;
+
+                default: throw new NotImplementedException();
             }
-            else escapeDown = false;
 
             base.Update(gameTime);
         }
@@ -124,14 +167,23 @@ namespace gamejam2014
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            world.Draw(gameTime, spriteBatch);
-
-            if (paused)
+            switch (current)
             {
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-                Utilities.Graphics.TexturePrimitiveDrawer.DrawRect(new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), spriteBatch, new Color(0, 0, 0, 128), 1);
-                spriteBatch.DrawString(ArtAssets.WorldFont, "Paused", new Vector2(graphics.PreferredBackBufferWidth * 0.5f, graphics.PreferredBackBufferHeight * 0.5f), Color.White);
-                spriteBatch.End();
+                case States.Playing:
+                    world.Draw(gameTime, spriteBatch);
+                    break;
+                case States.Paused:
+
+                    world.Draw(gameTime, spriteBatch);
+
+                    spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+                    Utilities.Graphics.TexturePrimitiveDrawer.DrawRect(new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), spriteBatch, new Color(0, 0, 0, 128), 1);
+                    spriteBatch.DrawString(ArtAssets.WorldFont, "Paused", new Vector2(graphics.PreferredBackBufferWidth * 0.5f, graphics.PreferredBackBufferHeight * 0.5f), Color.White);
+                    spriteBatch.End();
+
+                    break;
+
+                default: throw new NotImplementedException();
             }
 
             base.Draw(gameTime);

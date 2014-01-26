@@ -362,11 +362,15 @@ namespace gamejam2014
 
             //Global HUD.
 
-            sb.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+            PPPPOS = Vector2.Transform(new Vector2(MS.X, MS.Y), CamTransformInverse);
 
+            sb.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+            //sb.DrawString(ArtAssets.WorldFont, PPPPOS.ToString(), Vector2.Zero, Color.White);
             ArtAssets.DrawSpecialBar(sb, Special, new Point(GraphicsDevice.PresentationParameters.BackBufferWidth, GraphicsDevice.PresentationParameters.BackBufferHeight));
 
             sb.End();
         }
+
+        public Vector2 PPPPOS;
     }
 }

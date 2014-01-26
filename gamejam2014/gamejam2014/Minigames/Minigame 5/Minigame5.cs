@@ -28,6 +28,8 @@ namespace gamejam2014.Minigames.Minigame_5
             ring.Rotation = UsefulMath.FindRotation(dir);
             ring.Velocity = ring.MaxVelocity * dir;
 
+            SoundAssets5.PlayRandomProjectileHit();
+
             ring.OnHitByJouster += (s, e) =>
                 {
                     if (e.Enemy.ThisJouster == Jousting.Jousters.Dischord) return;
@@ -49,7 +51,7 @@ namespace gamejam2014.Minigames.Minigame_5
                 e.Enemy.Velocity = WorldData.ZoomScaleAmount[World.CurrentZoom] * PhysicsData5.BlackHolePushBack * V2.Normalize(UsefulMath.FindDirection(e.Enemy.Pos, BlackHole.Pos, false));
                 e.Enemy.Health -= PhysicsData5.BlackHoleDamage;
 
-                SoundAssets5.SunExplode.CreateInstance().Play();
+                SoundAssets5.SunExplode.Play();
 
                 V2 fromSun = UsefulMath.FindDirection(BlackHole.Pos, e.Enemy.Pos);
                 AdditiveParticles.Merge(ParticleAssets5.GetSunHitParticles(fromSun,
