@@ -47,6 +47,7 @@ namespace gamejam2014.Minigames.Minigame_3
             HillSprite = new AnimatedSprite(content.Load<Texture2D>("Art/Z3 Art/Hill"));
             HillSprite.SetOriginToCenter();
             HillSprite.StartAnimation();
+            HillSprite.DrawArgs.Scale *= 0.5f;
 
             ConfusedSprite = new AnimatedSprite(content.Load<Texture2D>("Art/Z3 Art/Stunned"), 2, TimeSpan.FromSeconds(0.25), true, -1, 0);
             ConfusedSprite.SetOriginToCenter();

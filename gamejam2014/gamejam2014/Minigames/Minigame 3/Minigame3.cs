@@ -49,6 +49,14 @@ namespace gamejam2014.Minigames.Minigame_3
                 {
                     SoundAssets3.PlayRandomWoodHit();
                 };
+            Harmony.OnHurtByEnemy += (s, e) =>
+            {
+                SoundAssets3.PlayRandomBark();
+            };
+            Harmony.OnHurtEnemy += (s, e) =>
+            {
+                SoundAssets3.PlayRandomBark();
+            };
 
             Utilities.Math.Shape.Rectangle bounds = World.WorldBounds;
             Interval xInt = bounds.XEnds,
