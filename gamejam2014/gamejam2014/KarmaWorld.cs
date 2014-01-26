@@ -107,6 +107,7 @@ namespace gamejam2014
             else return gamejam2014.PhysicsData.JoustingMinigamePhysics[CurrentZoom];
         }
         public Minigame CurrentMinigame = null;
+        public bool HarmonyWon = false, DiscordWon = false;
 
         //World dimensions.
         public Vector2 WorldSize
@@ -233,8 +234,8 @@ namespace gamejam2014
             foreach (Utilities.Graphics.AnimatedSprite sprite in ArtAssets.SpecialUIAlert.Values)
                 sprite.UpdateAnimation(gt);
 
-            //if (Input.GetBoolInput("Zoom In").Value) CurrentZoom = WorldData.ZoomIn(CurrentZoom);
-            //if (Input.GetBoolInput("Zoom Out").Value) CurrentZoom = WorldData.ZoomOut(CurrentZoom);
+            if (Input.GetBoolInput("Zoom In").Value) CurrentZoom = WorldData.ZoomIn(CurrentZoom);
+            if (Input.GetBoolInput("Zoom Out").Value) CurrentZoom = WorldData.ZoomOut(CurrentZoom);
 
             if (Special == 1.0f)
             {
@@ -271,11 +272,27 @@ namespace gamejam2014
                 CurrentMinigame.UpdateGame();
                 if (CurrentMinigame.MoveDown)
                 {
-                    CurrentZoom = WorldData.ZoomIn(CurrentZoom);
+                    if (currentZoom == ZoomLevels.One)
+                    {
+                        DiscordWon = true;
+                        return;
+                    }
+                    else
+                    {
+                        CurrentZoom = WorldData.ZoomIn(CurrentZoom);
+                    }
                 }
                 else if (CurrentMinigame.MoveUp)
                 {
-                    CurrentZoom = WorldData.ZoomOut(CurrentZoom);
+                    if (currentZoom == ZoomLevels.Five)
+                    {
+                        HarmonyWon = true;
+                        return;
+                    }
+                    else
+                    {
+                        CurrentZoom = WorldData.ZoomOut(CurrentZoom);
+                    }
                 }
             }
 

@@ -163,7 +163,7 @@ namespace gamejam2014
             return new IntermediateZoom();
         }
 
-        public static float TextIntroFadeTime = 10.0f;
+        public static float TextIntroFadeTime = 20.0f;
         public static float WaitPeriod = 3.0f;
         
         public static Dictionary<ZoomLevels, Minigame> Minigames = new Dictionary<ZoomLevels, Minigame>()

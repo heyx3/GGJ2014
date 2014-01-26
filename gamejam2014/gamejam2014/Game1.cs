@@ -31,6 +31,9 @@ namespace gamejam2014
 
             MainMenu,
             Instructions,
+
+            HarmonyWin,
+            DiscordWin,
         }
         public States current = States.Playing;
 
@@ -114,43 +117,87 @@ namespace gamejam2014
             {
                 case States.Playing:
                     world.Update(gameTime);
-                    if (!buttonDown && world.KS.IsKeyDown(Keys.Escape))
+                    if (world.KS.IsKeyDown(Keys.Escape))
                     {
-                        current = States.Paused;
-                        buttonDown = true;
+                        if (!buttonDown)
+                        {
+                            current = States.Paused;
+                            buttonDown = true;
+                        }
                     }
                     else buttonDown = false;
+                    if (world.HarmonyWon) current = States.HarmonyWin;
+                    else if (world.DiscordWon) current = States.DiscordWin;
+
                     break;
                 case States.Paused:
-                    if (!buttonDown && world.KS.IsKeyDown(Keys.Escape))
+                    if (world.KS.IsKeyDown(Keys.Escape))
                     {
-                        current = States.Playing;
-                        buttonDown = true;
+                        if (!buttonDown)
+                        {
+                            current = States.Playing;
+                            buttonDown = true;
+                        }
                     }
                     else buttonDown = false;
                     break;
                 case States.MainMenu:
-                    if (!buttonDown && world.KS.IsKeyDown(Keys.Enter))
+                    if (world.KS.IsKeyDown(Keys.Enter))
                     {
-                        current = States.Playing;
-                        buttonDown = true;
+                        if (!buttonDown)
+                        {
+                            current = States.Playing;
+                            buttonDown = true;
+                        }
                     }
-                    else if (!buttonDown && world.KS.IsKeyDown(Keys.Escape))
+                    else if (world.KS.IsKeyDown(Keys.Escape))
                     {
-                        Exit();
+                        if (!buttonDown)
+                        {
+                            Exit();
+                            buttonDown = true;
+                        }
                     }
-                    else if (!buttonDown && world.KS.IsKeyDown(Keys.Space))
+                    else if (world.KS.IsKeyDown(Keys.Space))
                     {
-                        current = States.Instructions;
-                        buttonDown = true;
+                        if (!buttonDown)
+                        {
+                            current = States.Instructions;
+                            buttonDown = true;
+                        }
                     }
                     else buttonDown = false;
                     break;
                 case States.Instructions:
-                    if (!buttonDown && world.KS.IsKeyDown(Keys.Escape))
+                    if (world.KS.IsKeyDown(Keys.Escape))
                     {
-                        current = States.MainMenu;
-                        buttonDown = true;
+                        if (!buttonDown)
+                        {
+                            current = States.MainMenu;
+                            buttonDown = true;
+                        }
+                    }
+                    else buttonDown = false;
+                    break;
+                case States.HarmonyWin:
+                    if (world.KS.IsKeyDown(Keys.Enter))
+                    {
+                        if (!buttonDown)
+                        {
+                            current = States.MainMenu;
+                            buttonDown = false;
+                        }
+                    }
+                    else buttonDown = false;
+                    break;
+                case States.DiscordWin:
+                    if (world.KS.IsKeyDown(Keys.Enter))
+                    {
+                        if (!buttonDown)
+                        {
+                            current = States.MainMenu;
+                            buttonDown = false;
+                        }
                     }
                     else buttonDown = false;
                     break;
@@ -180,7 +227,6 @@ namespace gamejam2014
                     Utilities.Graphics.TexturePrimitiveDrawer.DrawRect(new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), spriteBatch, new Color(0, 0, 0, 128), 1);
                     spriteBatch.DrawString(ArtAssets.WorldFont, "Paused", new Vector2(graphics.PreferredBackBufferWidth * 0.5f, graphics.PreferredBackBufferHeight * 0.5f), Color.White);
                     spriteBatch.End();
-
                     break;
 
                 default: throw new NotImplementedException();
