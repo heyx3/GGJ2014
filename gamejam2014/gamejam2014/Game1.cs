@@ -54,6 +54,7 @@ namespace gamejam2014
             Utilities.Graphics.TexturePrimitiveDrawer.MakeBlankDrawingTex(GraphicsDevice);
             WorldData.Initialize(GraphicsDevice);
             ArtAssets.Initialize(GraphicsDevice, Content);
+            SoundAssets.Initialize(Content);
             Minigames.Minigame_1.ArtAssets1.Initialize(GraphicsDevice, Content);
             Minigames.Minigame_2.ArtAssets2.Initialize(GraphicsDevice, Content);
             Minigames.Minigame_3.ArtAssets3.Initialize(GraphicsDevice, Content);

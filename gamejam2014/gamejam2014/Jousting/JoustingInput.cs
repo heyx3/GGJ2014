@@ -75,16 +75,16 @@ namespace gamejam2014.Jousting
         {
             Input.AddInput(PlayerToString[Jousters.Harmony] + "Movement",
                            new VectorSumButton(new FourArrowButton(KeyboardKeys.S, KeyboardKeys.W, KeyboardKeys.A, KeyboardKeys.D),
-                                               new FourBoolButtonButton(new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.DPadUp, false),
-                                                                        new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.DPadDown, false),
+                                               new FourBoolButtonButton(new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.DPadLeft, false),
                                                                         new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.DPadRight, false),
-                                                                        new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.DPadLeft, false))));
+                                                                        new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.DPadUp, false),
+                                                                        new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.DPadDown, false))));
             Input.AddInput(PlayerToString[Jousters.Dischord] + "Movement",
                            new VectorSumButton(new FourArrowButton(KeyboardKeys.Down, KeyboardKeys.Up, KeyboardKeys.Left, KeyboardKeys.Right),
-                                               new FourBoolButtonButton(new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.Y, false),
-                                                                        new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.A, false),
-                                                                        new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.X, false),
-                                                                        new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.B, false))));
+                                               new FourBoolButtonButton(new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.X, false),
+                                                                        new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.B, false),
+                                                                        new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.Y, false),
+                                                                        new GamePadButton(Microsoft.Xna.Framework.Input.Buttons.A, false))));
 
             Input.AddInput(PlayerToString[Jousters.Harmony] + "Special",
                            new MultiButton(new KeyboardButton(KeyboardKeys.End),

@@ -164,6 +164,7 @@ namespace gamejam2014
         }
 
         public static float TextIntroFadeTime = 10.0f;
+        public static float WaitPeriod = 3.0f;
         
         public static Dictionary<ZoomLevels, Minigame> Minigames = new Dictionary<ZoomLevels, Minigame>()
         {

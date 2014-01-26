@@ -30,7 +30,17 @@ namespace gamejam2014
 
         public static void Initialize(Microsoft.Xna.Framework.Content.ContentManager content)
         {
+            LevelMusic[ZoomLevels.One] = content.Load<SoundEffect>("Sound/Level_Amoeba_v3").CreateInstance();
+            LevelMusic[ZoomLevels.Three] = content.Load<SoundEffect>("Sound/Level_Dog").CreateInstance();
+            LevelMusic[ZoomLevels.Five] = content.Load<SoundEffect>("Sound/Level_Planet_v2").CreateInstance();
 
+            foreach (SoundEffectInstance inst in LevelMusic.Values)
+            {
+                if (inst != null)
+                    inst.Play();
+            }
+
+            SwitchZoomMusic(ZoomLevels.Three);
         }
     }
 }

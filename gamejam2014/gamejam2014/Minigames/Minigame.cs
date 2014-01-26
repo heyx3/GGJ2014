@@ -97,12 +97,14 @@ namespace gamejam2014.Minigames
         }
         public void UpdateGame()
         {
+            TimeSinceMinigameStart += (float)World.CurrentTime.ElapsedGameTime.TotalSeconds;
+
+            if (TimeSinceMinigameStart < WorldData.WaitPeriod) return;
+
             AlphaParticles.Update(World.CurrentTime);
             AdditiveParticles.Update(World.CurrentTime);
 
             Timers.Update(World.CurrentTime);
-            TimeSinceMinigameStart += (float)World.CurrentTime.ElapsedGameTime.TotalSeconds;
-
             //Update players.
             Harmony.Update(World.CurrentTime);
             Dischord.Update(World.CurrentTime);
@@ -231,6 +233,13 @@ namespace gamejam2014.Minigames
             ArtAssets.Arrow.Draw(Dischord.Pos + ((ArtAssets.ArrowOffset + Dischord.ColShape.BoundingRadius()) * Utilities.Math.UsefulMath.FindDirection(Dischord.Rotation)),
                                  sb);
             ArtAssets.Arrow.DrawArgs.Scale *= invScale;
+
+            if (CurrentZoom == World.CurrentZoom && TimeSinceMinigameStart < WorldData.WaitPeriod)
+            {
+                int time = (int)Math.Ceiling(WorldData.WaitPeriod - TimeSinceMinigameStart);
+                TexturePrimitiveDrawer.DrawRect(World.WorldBounds.BoundingRect(), sb, new Microsoft.Xna.Framework.Color(0, 0, 0, 100), 1);
+                sb.DrawString(ArtAssets.DebugFont, time.ToString() + "...", V2.Zero, Microsoft.Xna.Framework.Color.White, 0.0f, V2.Zero, scale, SpriteEffects.None, 1.0f);
+            }
 
             sb.End();
         }

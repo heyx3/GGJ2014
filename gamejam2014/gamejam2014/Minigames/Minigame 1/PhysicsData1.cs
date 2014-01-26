@@ -11,7 +11,7 @@ namespace gamejam2014.Minigames.Minigame_1
                             InfectedBacteriaMass = 0.5f;
         public static float BacteriaMassGiveToPlayerScale = 0.25f;
 
-        public static float SpikePowerScale = 1.5f;
+        public static float SpikePowerScale = 1.65f;
         public static float SpikePowerLength = 8.0f;
 
         private static float AuraDist = 200.0f;
