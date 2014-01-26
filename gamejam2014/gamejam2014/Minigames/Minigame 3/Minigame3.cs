@@ -45,6 +45,11 @@ namespace gamejam2014.Minigames.Minigame_3
                                                                           PhysicsData3.GetDoghouseCenter(WorldData.ZoomScaleAmount[CurrentZoom])),
                                               true, 0.0f, 999.0f));
             DogHouse = Blockers[0];
+            DogHouse.OnHitByJouster += (s, e) =>
+                {
+                    SoundAssets3.PlayRandomWoodHit();
+                };
+
             Utilities.Math.Shape.Rectangle bounds = World.WorldBounds;
             Interval xInt = bounds.XEnds,
                      yInt = bounds.YEnds;
@@ -57,9 +62,16 @@ namespace gamejam2014.Minigames.Minigame_3
             }
         }
 
+        bool wasInHill = false;
         protected override void Update(Jousting.Jouster.CollisionData playerCollision)
         {
             HarmonyInsideHill = HillShape.Touches(Harmony.ColShape);
+            if (HarmonyInsideHill && !wasInHill)
+            {
+                SoundAssets3.PlayRandomSnarl();
+            }
+            wasInHill = HarmonyInsideHill;
+
             if (HarmonyInsideHill && !HillShape.Touches(Dischord.ColShape))
             {
                 TimeInHill += (float)World.CurrentTime.ElapsedGameTime.TotalSeconds;

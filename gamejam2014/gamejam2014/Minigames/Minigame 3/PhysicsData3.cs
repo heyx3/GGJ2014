@@ -9,12 +9,12 @@ namespace gamejam2014.Minigames.Minigame_3
 {
     public static class PhysicsData3
     {
-        private static V2 HillCenter = new V2(0.0f, -80.0f);
+        private static V2 HillCenter = new V2(0.0f, 80.0f);
         public static Circle GetHillCircle(float zoomScale) { return new Circle(HillCenter * zoomScale, ArtAssets3.HillRadius * zoomScale); }
 
         public static float TimeInHillToWin = 60.0f;
 
-        private static V2 DoghouseCenter = new V2(0.0f, -200.0f);
+        private static V2 DoghouseCenter = new V2(0.0f, 0.0f);
         public static V2 GetDoghouseCenter(float zoomScale) { return zoomScale * DoghouseCenter; }
 
         public static float SpecialStunTime = 6.5f;

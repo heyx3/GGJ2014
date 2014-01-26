@@ -97,7 +97,8 @@ namespace gamejam2014.Minigames
         }
         public void UpdateGame()
         {
-            TimeSinceMinigameStart += (float)World.CurrentTime.ElapsedGameTime.TotalSeconds;
+            if (!World.ZoomingIn && !World.ZoomingOut)
+                TimeSinceMinigameStart += (float)World.CurrentTime.ElapsedGameTime.TotalSeconds;
 
             if (TimeSinceMinigameStart < WorldData.WaitPeriod) return;
 
@@ -234,7 +235,7 @@ namespace gamejam2014.Minigames
                                  sb);
             ArtAssets.Arrow.DrawArgs.Scale *= invScale;
 
-            if (CurrentZoom == World.CurrentZoom && TimeSinceMinigameStart < WorldData.WaitPeriod)
+            if (CurrentZoom == World.CurrentZoom && !World.ZoomingOut && !World.ZoomingIn && TimeSinceMinigameStart < WorldData.WaitPeriod)
             {
                 int time = (int)Math.Ceiling(WorldData.WaitPeriod - TimeSinceMinigameStart);
                 TexturePrimitiveDrawer.DrawRect(World.WorldBounds.BoundingRect(), sb, new Microsoft.Xna.Framework.Color(0, 0, 0, 100), 1);

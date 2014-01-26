@@ -9,7 +9,7 @@ namespace gamejam2014
     /// </summary>
     public static class SoundAssets
     {
-        public static float LevelMusicVolume = 1.0f;
+        public static float LevelMusicVolume = .15f;
 
         public static Dictionary<ZoomLevels, SoundEffectInstance> LevelMusic = new Dictionary<ZoomLevels, SoundEffectInstance>()
         {
@@ -37,7 +37,10 @@ namespace gamejam2014
             foreach (SoundEffectInstance inst in LevelMusic.Values)
             {
                 if (inst != null)
+                {
+                    inst.IsLooped = true;
                     inst.Play();
+                }
             }
 
             SwitchZoomMusic(ZoomLevels.Three);

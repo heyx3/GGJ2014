@@ -64,6 +64,8 @@ namespace gamejam2014.Minigames.Minigame_1
             Bacteria bact = new Bacteria(pos, WorldData.ZoomScaleAmount[CurrentZoom]);
             bact.OnHitByJouster += (s, e) =>
                 {
+                    SoundAssets1.PlayRandomSquish();
+
                     Bacteria b = s as Bacteria;
                     if (b == null) return;
 
@@ -117,6 +119,15 @@ namespace gamejam2014.Minigames.Minigame_1
             
             for (int i = 0; i < PhysicsData1.NumbStartingBacteria; ++i)
                 Blockers.Add(MakeRandomBacteria());
+
+            Harmony.OnHurtEnemy += (s, e) =>
+            {
+                SoundAssets1.PlayRandomHiss();
+            };
+            Dischord.OnHurtEnemy += (s, e) =>
+            {
+                SoundAssets1.PlayRandomHiss();
+            };
 
             //Start the timer loop.
             IntervalCounter bacteriaSpawn = new IntervalCounter(TimeSpan.FromSeconds(PhysicsData1.BacteriaAppearanceTime));

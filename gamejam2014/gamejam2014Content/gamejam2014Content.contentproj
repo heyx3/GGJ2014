@@ -355,6 +355,130 @@
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sound\Z3\Bark_1.wav">
+      <Name>Bark_1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z3\Bark_2.wav">
+      <Name>Bark_2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z3\Bark_3.wav">
+      <Name>Bark_3</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z3\Both_Bark_1.wav">
+      <Name>Both_Bark_1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z3\Snarl_1.wav">
+      <Name>Snarl_1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z3\Snarl_2.wav">
+      <Name>Snarl_2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z3\Wood_Hit_1.wav">
+      <Name>Wood_Hit_1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z3\Wood_Hit_2.wav">
+      <Name>Wood_Hit_2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z3\Yard_Ambiance.wav">
+      <Name>Yard_Ambiance</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z5\Collision_1.wav">
+      <Name>Collision_1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z5\Collision_2.wav">
+      <Name>Collision_2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z5\Collision_3.wav">
+      <Name>Collision_3</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z5\Projectile_Earth.wav">
+      <Name>Projectile_Earth</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z5\Projectile_Hit_1.wav">
+      <Name>Projectile_Hit_1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z5\Projectile_Hit_2.wav">
+      <Name>Projectile_Hit_2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z5\Projectile_Saturn.wav">
+      <Name>Projectile_Saturn</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z5\Sun_Exploding.wav">
+      <Name>Sun_Exploding</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sound\Z1\Hiss_1.wav">
+      <Name>Hiss_1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z1\Hiss_2.wav">
+      <Name>Hiss_2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z1\Hiss_3.wav">
+      <Name>Hiss_3</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z1\Squish_1.wav">
+      <Name>Squish_1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z1\Squish_2.wav">
+      <Name>Squish_2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z1\Squish_3.wav">
+      <Name>Squish_3</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sound\Z1\Squish_4.wav">
+      <Name>Squish_4</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

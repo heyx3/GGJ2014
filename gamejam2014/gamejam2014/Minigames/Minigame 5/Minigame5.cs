@@ -27,11 +27,12 @@ namespace gamejam2014.Minigames.Minigame_5
                                                          true, PhysicsData5.GetRingSpeed(WorldData.ZoomScaleAmount[CurrentZoom]));
             ring.Rotation = UsefulMath.FindRotation(dir);
             ring.Velocity = ring.MaxVelocity * dir;
-            //ring 
 
             ring.OnHitByJouster += (s, e) =>
                 {
                     if (e.Enemy.ThisJouster == Jousting.Jousters.Dischord) return;
+
+                    SoundAssets5.PlayRandomProjectileHit();
 
                     e.Enemy.Health -= PhysicsData5.RingDamage;
                     KillBlocker((Jousting.Blocker)s);
@@ -48,6 +49,8 @@ namespace gamejam2014.Minigames.Minigame_5
                 e.Enemy.Velocity = WorldData.ZoomScaleAmount[World.CurrentZoom] * PhysicsData5.BlackHolePushBack * V2.Normalize(UsefulMath.FindDirection(e.Enemy.Pos, BlackHole.Pos, false));
                 e.Enemy.Health -= PhysicsData5.BlackHoleDamage;
 
+                SoundAssets5.SunExplode.CreateInstance().Play();
+
                 V2 fromSun = UsefulMath.FindDirection(BlackHole.Pos, e.Enemy.Pos);
                 AdditiveParticles.Merge(ParticleAssets5.GetSunHitParticles(fromSun,
                                                                            BlackHole.Pos + (fromSun * BlackHoleCol.Radius),
@@ -57,6 +60,13 @@ namespace gamejam2014.Minigames.Minigame_5
 
             Harmony.OnHurtEnemy += (s, e) =>
                 {
+                    SoundAssets5.PlayRandomCollision();
+                    AdditiveParticles.Merge(ParticleAssets5.GetPlanetHitParticles((e.Enemy.Pos + Harmony.Pos) * 0.5f,
+                                                                                  Utilities.Conversions.GetPerp(UsefulMath.FindDirection(e.Enemy.Pos, Harmony.Pos)), World.CurrentTime));
+                };
+            Harmony.OnHurtByEnemy += (s, e) =>
+                {
+                    SoundAssets5.PlayRandomCollision();
                     AdditiveParticles.Merge(ParticleAssets5.GetPlanetHitParticles((e.Enemy.Pos + Harmony.Pos) * 0.5f,
                                                                                   Utilities.Conversions.GetPerp(UsefulMath.FindDirection(e.Enemy.Pos, Harmony.Pos)), World.CurrentTime));
                 };
@@ -111,6 +121,7 @@ namespace gamejam2014.Minigames.Minigame_5
 
         public override void OnHarmonySpecial()
         {
+            SoundAssets5.ProjectileEarth.CreateInstance().Play();
             Harmony.IsSpiky_Aura = true;
 
             Utilities.IntervalCounter ic = new Utilities.IntervalCounter(TimeSpan.FromSeconds(PhysicsData5.NoGravLength));
