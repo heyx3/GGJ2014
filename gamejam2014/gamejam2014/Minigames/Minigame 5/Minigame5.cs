@@ -87,6 +87,11 @@ namespace gamejam2014.Minigames.Minigame_5
             {
                 Blockers[i].Rotation = UsefulMath.FindRotation(Blockers[i].Velocity);
             }
+
+
+            //Update animation.
+            ArtAssets5.NoGravOverlay.UpdateAnimation(World.CurrentTime);
+            ArtAssets5.Ring.UpdateAnimation(World.CurrentTime);
         }
 
         protected override string GetHarmonyIntroString()
@@ -122,15 +127,30 @@ namespace gamejam2014.Minigames.Minigame_5
 
         protected override void DrawAbovePlayers(SpriteBatch sb)
         {
-            if ((World.CurrentZoom == WorldData.ZoomIn(ZoomLevels.Five) && World.ZoomingIn) ||
-                (World.CurrentZoom == ZoomLevels.Five && World.ZoomingOut))
+            bool first = (World.CurrentZoom == WorldData.ZoomIn(ZoomLevels.Five) && World.ZoomingIn) ||
+                         (World.CurrentZoom == ZoomLevels.Five && World.ZoomingOut),
+                 second = Harmony.IsSpiky_Aura;
+
+            if (!first && !second) return;
+
+            sb.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, World.CamTransform);
+
+            if (first)
             {
                 //Draw the rendered world on top of the globe.
-                sb.Begin(SpriteSortMode.Immediate, BlendState.Opaque, null, null, null, null, World.CamTransform);
                 sb.Draw(World.RenderedWorldTex, Harmony.Pos, null, Microsoft.Xna.Framework.Color.White, 0.0f,
                         0.5f * new V2(World.RenderedWorldTex.Width, World.RenderedWorldTex.Height), 1.0f, SpriteEffects.None, 1.0f);
-                sb.End();
             }
+
+            //Draw the overlay.
+            if (second)
+            {
+                ArtAssets5.NoGravOverlay.DrawArgs.Scale *= WorldData.ZoomScaleAmount[ZoomLevels.Five];
+                ArtAssets5.NoGravOverlay.Draw(Harmony.Pos, sb);
+                ArtAssets5.NoGravOverlay.DrawArgs.Scale /= WorldData.ZoomScaleAmount[ZoomLevels.Five];
+            }
+
+            sb.End();
         }
     }
 }

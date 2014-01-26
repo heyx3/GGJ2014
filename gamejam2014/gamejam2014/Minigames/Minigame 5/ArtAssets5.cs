@@ -38,6 +38,7 @@ namespace gamejam2014.Minigames.Minigame_5
 
         public static AnimatedSprite BlackHole;
         public static AnimatedSprite Ring;
+        public static AnimatedSprite NoGravOverlay;
 
         public static void Initialize(GraphicsDevice device, ContentManager content)
         {
@@ -48,6 +49,10 @@ namespace gamejam2014.Minigames.Minigame_5
             Ring = new AnimatedSprite(content.Load<Texture2D>("Art/Z5 Art/Ring"));
             Ring.SetOriginToCenter();
             Ring.StartAnimation();
+
+            NoGravOverlay = new AnimatedSprite(content.Load<Texture2D>("Art/Z5 Art/NoGrav Overlay"));
+            NoGravOverlay.SetOriginToCenter();
+            NoGravOverlay.StartAnimation();
         }
     }
 }

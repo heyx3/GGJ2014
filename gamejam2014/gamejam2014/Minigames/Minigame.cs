@@ -207,19 +207,32 @@ namespace gamejam2014.Minigames
 
             DrawAbovePlayers(sb);
 
+
+            sb.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, World.CamTransform);
+            
             if (TimeSinceMinigameStart < WorldData.TextIntroFadeTime && World.CurrentZoom == CurrentZoom)
             {
                 float lerp = TimeSinceMinigameStart / WorldData.TextIntroFadeTime;
-                lerp = (float)Math.Pow(lerp, 10.0);
+                lerp = 1.0f - lerp;
+                lerp = (float)Math.Pow(lerp, 1.0);
 
                 byte alpha = (byte)(255.0f * lerp);
                 Microsoft.Xna.Framework.Color col = new Microsoft.Xna.Framework.Color(255, 255, 255, alpha);
 
-                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, World.CamTransform);
                 sb.DrawString(ArtAssets.WorldFont, GetHarmonyIntroString(), Harmony.Pos + (scale * new V2(0.0f, -50.0f)), col, 0.0f, V2.Zero, WorldData.ZoomScaleAmount[CurrentZoom], SpriteEffects.None, 1.0f);
                 sb.DrawString(ArtAssets.WorldFont, GetDischordIntroString(), Dischord.Pos + (scale * new V2(0.0f, -50.0f)), col, 0.0f, V2.Zero, WorldData.ZoomScaleAmount[CurrentZoom], SpriteEffects.None, 1.0f);
-                sb.End();
             }
+
+            ArtAssets.Arrow.DrawArgs.Scale *= scale;
+            ArtAssets.Arrow.DrawArgs.Rotation = Harmony.Rotation;
+            ArtAssets.Arrow.Draw(Harmony.Pos + ((ArtAssets.ArrowOffset + Harmony.ColShape.BoundingRadius()) * Utilities.Math.UsefulMath.FindDirection(Harmony.Rotation)),
+                                 sb);
+            ArtAssets.Arrow.DrawArgs.Rotation = Dischord.Rotation;
+            ArtAssets.Arrow.Draw(Dischord.Pos + ((ArtAssets.ArrowOffset + Dischord.ColShape.BoundingRadius()) * Utilities.Math.UsefulMath.FindDirection(Dischord.Rotation)),
+                                 sb);
+            ArtAssets.Arrow.DrawArgs.Scale *= invScale;
+
+            sb.End();
         }
 
         /// <summary>

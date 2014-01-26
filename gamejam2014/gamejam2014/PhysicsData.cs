@@ -23,7 +23,7 @@ namespace gamejam2014
         };
         public static Dictionary<ZoomLevels, JousterPhysicsData> DischordSpecialPhysics = new Dictionary<ZoomLevels, JousterPhysicsData>()
         {
-            { ZoomLevels.Three, new JousterPhysicsData(ZoomLevels.Three, 1000.0f, 4.0f, 1500.0f, 800.0f, 0.85f) },
+            { ZoomLevels.Three, new JousterPhysicsData(ZoomLevels.Three, 1000.0f, 4.0f, 1200.0f, 800.0f, 0.85f) },
         };
 
         public static Dictionary<ZoomLevels, float> JousterStartingMass = new Dictionary<ZoomLevels, float>()

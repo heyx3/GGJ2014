@@ -85,7 +85,12 @@ namespace gamejam2014
             { Jousting.Jousters.Dischord, null },
         };
 
+        public static AnimatedSprite Arrow;
+        public static float ArrowOffset = 25.0f;
+
+
         public static SpriteFont DebugFont, WorldFont;
+
 
         public static Shape GetJousterShape(ZoomLevels zoom, float scale)
         {
@@ -168,6 +173,13 @@ namespace gamejam2014
 
             SpecialUIAlert[Jousting.Jousters.Harmony].StartAnimation();
             SpecialUIAlert[Jousting.Jousters.Dischord].StartAnimation();
+
+
+            Arrow = new AnimatedSprite(content.Load<Texture2D>("Art/direction_arrow"));
+            Arrow.SetOriginToCenter();
+            Arrow.DrawArgs.Origin.X = 0.0f;
+            Arrow.DrawArgs.Color.A = 128;
+
 
             DebugFont = content.Load<SpriteFont>("DebugFont");
             WorldFont = content.Load<SpriteFont>("WorldFont");
