@@ -13,6 +13,15 @@ namespace gamejam2014.Minigames.Minigame_4
         private int DiscordScore;
         private int HarmonyScore;
 
+        protected override string GetHarmonyIntroString()
+        {
+            throw new NotImplementedException();
+        }
+        protected override string GetDischordIntroString()
+        {
+            throw new NotImplementedException();
+        }
+
         private List<String> BadStrings = new List<String>()
         {
             "Television",

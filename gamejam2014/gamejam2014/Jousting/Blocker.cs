@@ -164,14 +164,14 @@ namespace gamejam2014.Jousting
                                                    joustPP = Utilities.Conversions.SplitIntoComponents(joust.Velocity, tangent);
 
                 Velocity = blockerPP.Parallel + (BounceVelocityDamp * joustPP.Perpendicular * joust.Mass / Mass);
-                joust.Velocity = joustPP.Parallel + (Jouster.PhysData.BounceEnergyScale * blockerPP.Perpendicular * Mass / joust.Mass);
+                joust.Velocity = joustPP.Parallel + (joust.PhysData.BounceEnergyScale * blockerPP.Perpendicular * Mass / joust.Mass);
             }
             else
             {
                 //Push the jouster away from this Blocker.
                 V2 away = UsefulMath.FindDirection(Pos, joust.Pos);
                 Utilities.Conversions.ParallelPerp pp = Utilities.Conversions.SplitIntoComponents(joust.Velocity, away);
-                joust.Velocity = pp.Perpendicular + (KarmaWorld.World.PhysicsData.BounceEnergyScale * -pp.Parallel);
+                joust.Velocity = pp.Perpendicular + (joust.PhysData.BounceEnergyScale * -pp.Parallel);
             }
         }
         public void OnHitBlocker(Blocker other)

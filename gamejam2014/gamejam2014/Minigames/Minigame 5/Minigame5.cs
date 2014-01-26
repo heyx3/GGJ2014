@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Utilities.Math;
 using Microsoft.Xna.Framework.Graphics;
@@ -46,8 +47,19 @@ namespace gamejam2014.Minigames.Minigame_5
             {
                 e.Enemy.Velocity = WorldData.ZoomScaleAmount[World.CurrentZoom] * PhysicsData5.BlackHolePushBack * V2.Normalize(UsefulMath.FindDirection(e.Enemy.Pos, BlackHole.Pos, false));
                 e.Enemy.Health -= PhysicsData5.BlackHoleDamage;
+
+                V2 fromSun = UsefulMath.FindDirection(BlackHole.Pos, e.Enemy.Pos);
+                AdditiveParticles.Merge(ParticleAssets5.GetSunHitParticles(fromSun,
+                                                                           BlackHole.Pos + (fromSun * BlackHoleCol.Radius),
+                                                                           World.CurrentTime));
             };
             BlackHole = Blockers[0];
+
+            Harmony.OnHurtEnemy += (s, e) =>
+                {
+                    AdditiveParticles.Merge(ParticleAssets5.GetPlanetHitParticles((e.Enemy.Pos + Harmony.Pos) * 0.5f,
+                                                                                  Utilities.Conversions.GetPerp(UsefulMath.FindDirection(e.Enemy.Pos, Harmony.Pos)), World.CurrentTime));
+                };
         }
 
         protected override void Update(Jousting.Jouster.CollisionData playerCollision)
@@ -59,8 +71,10 @@ namespace gamejam2014.Minigames.Minigame_5
             float scale = WorldData.ZoomScaleAmount[World.CurrentZoom];
 
 
-            Harmony.Acceleration = V2.Normalize(harmonyToBH) * PhysicsData5.GetBlackHolePull(harmonyToBH.Length(), scale);
-            Dischord.Acceleration = V2.Normalize(dischordToBH) * PhysicsData5.GetBlackHolePull(dischordToBH.Length(), scale);
+            if (!Harmony.IsSpiky_Aura)
+                Harmony.Acceleration = V2.Normalize(harmonyToBH) * PhysicsData5.GetBlackHolePull(harmonyToBH.Length(), scale);
+            if (!Dischord.IsSpiky_Aura)
+                Dischord.Acceleration = V2.Normalize(dischordToBH) * PhysicsData5.GetBlackHolePull(dischordToBH.Length(), scale);
             foreach (Jousting.Blocker blocker in Blockers)
             {
                 blocker.Acceleration = UsefulMath.FindDirection(blocker.Pos, blackHole.Center) *
@@ -75,6 +89,15 @@ namespace gamejam2014.Minigames.Minigame_5
             }
         }
 
+        protected override string GetHarmonyIntroString()
+        {
+            return "Destroy!";
+        }
+        protected override string GetDischordIntroString()
+        {
+            return "Destroy!";
+        }
+
         protected override void OnMinigameEnd()
         {
             Harmony.Rotation = 0.0f;
@@ -83,7 +106,14 @@ namespace gamejam2014.Minigames.Minigame_5
 
         public override void OnHarmonySpecial()
         {
-            //Harmony's special just cancels' dischord's special from happening.
+            Harmony.IsSpiky_Aura = true;
+
+            Utilities.IntervalCounter ic = new Utilities.IntervalCounter(TimeSpan.FromSeconds(PhysicsData5.NoGravLength));
+            ic.IntervalTrigger += (s, e) =>
+                {
+                    Harmony.IsSpiky_Aura = false;
+                };
+            World.Timers.AddTimerNextUpdate(ic, true);
         }
         public override void OnDischordSpecial()
         {

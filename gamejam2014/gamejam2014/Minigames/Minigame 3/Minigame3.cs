@@ -60,7 +60,7 @@ namespace gamejam2014.Minigames.Minigame_3
         protected override void Update(Jousting.Jouster.CollisionData playerCollision)
         {
             HarmonyInsideHill = HillShape.Touches(Harmony.ColShape);
-            if (HarmonyInsideHill)
+            if (HarmonyInsideHill && !HillShape.Touches(Dischord.ColShape))
             {
                 TimeInHill += (float)World.CurrentTime.ElapsedGameTime.TotalSeconds;
             }
@@ -77,7 +77,7 @@ namespace gamejam2014.Minigames.Minigame_3
                 Jousting.Blocker ball = Blockers[i + 1];
 
                 //If the friction this frame is strong enough to stop the ball, manually stop it.
-                float fricPerFrame = Jousting.Jouster.PhysData.Friction * (float)World.CurrentTime.ElapsedGameTime.TotalSeconds;
+                float fricPerFrame = PhysicsData.JoustingMinigamePhysics[CurrentZoom].Friction * (float)World.CurrentTime.ElapsedGameTime.TotalSeconds;
                 if (fricPerFrame * fricPerFrame >= ball.Velocity.LengthSquared())
                 {
                     ball.Velocity = Vector2.Zero;
@@ -87,7 +87,7 @@ namespace gamejam2014.Minigames.Minigame_3
                 {
                     Vector2 vel = ball.Velocity;
                     vel.Normalize();
-                    ball.Acceleration += -vel * Jousting.Jouster.PhysData.Friction * ball.Mass;
+                    ball.Acceleration += -vel * PhysicsData.JoustingMinigamePhysics[CurrentZoom].Friction * ball.Mass;
                 }
             }
 
@@ -95,6 +95,15 @@ namespace gamejam2014.Minigames.Minigame_3
             ArtAssets3.ConfusedSprite.UpdateAnimation(World.CurrentTime);
             ArtAssets3.HarmonyJousterStill.UpdateAnimation(World.CurrentTime);
             ArtAssets3.DischordJousterStill.UpdateAnimation(World.CurrentTime);
+        }
+
+        protected override string GetHarmonyIntroString()
+        {
+            return "Capture!";
+        }
+        protected override string GetDischordIntroString()
+        {
+            return "Attack!";
         }
 
         public override void OnHarmonySpecial()

@@ -147,7 +147,6 @@
     <Compile Include="Minigames\Minigame 5\PhysicsData5.cs" />
     <Compile Include="Minigames\Minigame 5\SoundAssets5.cs" />
     <Compile Include="Minigames\Minigame.cs" />
-    <Compile Include="Minigames\TestMinigame.cs" />
     <Compile Include="PhysicsData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

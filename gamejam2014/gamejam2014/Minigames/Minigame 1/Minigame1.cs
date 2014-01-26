@@ -101,6 +101,15 @@ namespace gamejam2014.Minigames.Minigame_1
             return bact;
         }
 
+        protected override string GetHarmonyIntroString()
+        {
+            return "Grow and Attack!";
+        }
+        protected override string GetDischordIntroString()
+        {
+            return "Infect and Attack!";
+        }
+
         protected override void Reset()
         {
             ArtAssets.PlayerSprites[ZoomLevels.One][Jousters.Harmony].DrawArgs.Scale = V2.One;

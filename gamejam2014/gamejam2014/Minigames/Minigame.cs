@@ -31,6 +31,9 @@ namespace gamejam2014.Minigames
         public List<Blocker> Blockers = new List<Blocker>();
         private List<Blocker> ToRemove = new List<Blocker>();
 
+        protected abstract string GetHarmonyIntroString();
+        protected abstract string GetDischordIntroString();
+
         public TimerManager Timers = new TimerManager();
         public Utilities.Graphics.ParticleEffect AlphaParticles, AdditiveParticles;
 
@@ -203,6 +206,20 @@ namespace gamejam2014.Minigames
             DischordSprite.DrawArgs.Scale *= invScale;
 
             DrawAbovePlayers(sb);
+
+            if (TimeSinceMinigameStart < WorldData.TextIntroFadeTime && World.CurrentZoom == CurrentZoom)
+            {
+                float lerp = TimeSinceMinigameStart / WorldData.TextIntroFadeTime;
+                lerp = (float)Math.Pow(lerp, 10.0);
+
+                byte alpha = (byte)(255.0f * lerp);
+                Microsoft.Xna.Framework.Color col = new Microsoft.Xna.Framework.Color(255, 255, 255, alpha);
+
+                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, World.CamTransform);
+                sb.DrawString(ArtAssets.WorldFont, GetHarmonyIntroString(), Harmony.Pos + (scale * new V2(0.0f, -50.0f)), col, 0.0f, V2.Zero, WorldData.ZoomScaleAmount[CurrentZoom], SpriteEffects.None, 1.0f);
+                sb.DrawString(ArtAssets.WorldFont, GetDischordIntroString(), Dischord.Pos + (scale * new V2(0.0f, -50.0f)), col, 0.0f, V2.Zero, WorldData.ZoomScaleAmount[CurrentZoom], SpriteEffects.None, 1.0f);
+                sb.End();
+            }
         }
 
         /// <summary>

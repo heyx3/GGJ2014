@@ -21,6 +21,10 @@ namespace gamejam2014
             { ZoomLevels.Four, new JousterPhysicsData(ZoomLevels.Four, 1000.0f, 4.0f, 450.0f, 150.0f, 0.85f) },
             { ZoomLevels.Five, new JousterPhysicsData(ZoomLevels.Five, 850.0f, 4.0f, 400.0f, 000.0f, 0.95f) },
         };
+        public static Dictionary<ZoomLevels, JousterPhysicsData> DischordSpecialPhysics = new Dictionary<ZoomLevels, JousterPhysicsData>()
+        {
+            { ZoomLevels.Three, new JousterPhysicsData(ZoomLevels.Three, 1000.0f, 4.0f, 1500.0f, 800.0f, 0.85f) },
+        };
 
         public static Dictionary<ZoomLevels, float> JousterStartingMass = new Dictionary<ZoomLevels, float>()
         {

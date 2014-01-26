@@ -100,7 +100,12 @@ namespace gamejam2014
         public bool IsSpecialFull { get { return Special >= 1.0f; } }
 
         //Minigame-specific stuff.
-        public JousterPhysicsData PhysicsData { get { return gamejam2014.PhysicsData.JoustingMinigamePhysics[CurrentZoom]; } }
+        public JousterPhysicsData PhysicsData(Jousters jouster)
+        {
+            if (jouster == Jousters.Dischord && gamejam2014.PhysicsData.DischordSpecialPhysics.ContainsKey(CurrentZoom))
+                return gamejam2014.PhysicsData.DischordSpecialPhysics[CurrentZoom];
+            else return gamejam2014.PhysicsData.JoustingMinigamePhysics[CurrentZoom];
+        }
         public Minigame CurrentMinigame = null;
 
         //World dimensions.

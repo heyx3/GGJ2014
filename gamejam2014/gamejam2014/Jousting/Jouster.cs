@@ -11,7 +11,13 @@ namespace gamejam2014.Jousting
     /// </summary>
     public class Jouster : MovementPhysics
     {
-        public static JousterPhysicsData PhysData { get { return KarmaWorld.World.PhysicsData; } }
+        public JousterPhysicsData PhysData
+        {
+            get
+            {
+                return KarmaWorld.World.PhysicsData(ThisJouster);
+            }
+        }
 
 
         public class CollisionData
@@ -122,10 +128,16 @@ namespace gamejam2014.Jousting
 
         public Jouster(Jousters thisJouster, V2 pos, ZoomLevels zoom)
             : base(ArtAssets.GetJousterShape(KarmaWorld.World.CurrentZoom, WorldData.ZoomScaleAmount[zoom]),
-                   (zoom == ZoomLevels.Five ? Single.PositiveInfinity : PhysData.Acceleration), PhysData.MaxSpeed)
+                   1.0f, 1.0f)
         {
-            Pos = pos;
             ThisJouster = thisJouster;
+
+            MaxAcceleration = (zoom == ZoomLevels.Five ?
+                                    Single.PositiveInfinity :
+                                    PhysData.Acceleration);
+            MaxVelocity = PhysData.MaxSpeed;
+
+            Pos = pos;
             Mass = PhysicsData.JousterStartingMass[zoom];
         }
 

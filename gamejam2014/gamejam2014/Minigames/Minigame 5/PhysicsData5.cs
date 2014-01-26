@@ -37,5 +37,7 @@ namespace gamejam2014.Minigames.Minigame_5
         public static float GetRingSpeed(float zoomScale) { return zoomScale * RingSpeed; }
 
         public static float RingDamage = 0.225f;
+
+        public static float NoGravLength = 7.0f;
     }
 }
