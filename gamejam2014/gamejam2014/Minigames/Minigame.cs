@@ -171,11 +171,11 @@ namespace gamejam2014.Minigames
 
             HarmonySprite.DrawArgs.Rotation = Harmony.Rotation;
             HarmonySprite.DrawArgs.Scale *= scale;
-            if (!MoveUp && !MoveDown) HarmonySprite.DrawArgs.Color = new Microsoft.Xna.Framework.Color(Harmony.Health, Harmony.Health, Harmony.Health);
+            if (!MoveUp && !MoveDown) HarmonySprite.DrawArgs.Color = new Microsoft.Xna.Framework.Color(1.0f, Harmony.Health, Harmony.Health);
             else HarmonySprite.DrawArgs.Color = Microsoft.Xna.Framework.Color.White;
             DischordSprite.DrawArgs.Rotation = Dischord.Rotation;
             DischordSprite.DrawArgs.Scale *= scale;
-            if (!MoveUp && !MoveDown) DischordSprite.DrawArgs.Color = new Microsoft.Xna.Framework.Color(Dischord.Health, Dischord.Health, Dischord.Health);
+            if (!MoveUp && !MoveDown) DischordSprite.DrawArgs.Color = new Microsoft.Xna.Framework.Color(1.0f, Dischord.Health, Dischord.Health);
             else DischordSprite.DrawArgs.Color = Microsoft.Xna.Framework.Color.White;
 
             sb.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, World.CamTransform);
