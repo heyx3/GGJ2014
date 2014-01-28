@@ -118,6 +118,7 @@ namespace gamejam2014.Jousting
 
         public float Mass;
         public float Health = 1.0f;
+        public bool WrapAround = false;
 
         //Abilities.
         public bool IsSpiky_Aura = false;
@@ -147,10 +148,17 @@ namespace gamejam2014.Jousting
             Rectangle bounds = KarmaWorld.World.WorldBounds;
             if (input.X < bounds.Left)
             {
-                input.X = bounds.Left;
-                if (Velocity.X < 0.0f)
+                if (!WrapAround)
                 {
-                    Velocity = new V2(-Velocity.X * PhysData.BounceEnergyScale, Velocity.Y);
+                    input.X = bounds.Left;
+                    if (Velocity.X < 0.0f)
+                    {
+                        Velocity = new V2(-Velocity.X * PhysData.BounceEnergyScale, Velocity.Y);
+                    }
+                }
+                else
+                {
+                    input.X = bounds.Right;
                 }
 
                 if (OnWallBounce != null)
@@ -158,10 +166,17 @@ namespace gamejam2014.Jousting
             }
             if (input.Y < bounds.Top)
             {
-                input.Y = bounds.Top;
-                if (Velocity.Y < 0.0f)
+                if (!WrapAround)
                 {
-                    Velocity = new V2(Velocity.X, -Velocity.Y * PhysData.BounceEnergyScale);
+                    input.Y = bounds.Top;
+                    if (Velocity.Y < 0.0f)
+                    {
+                        Velocity = new V2(Velocity.X, -Velocity.Y * PhysData.BounceEnergyScale);
+                    }
+                }
+                else
+                {
+                    input.Y = bounds.Bottom;
                 }
 
                 if (OnWallBounce != null)
@@ -169,10 +184,17 @@ namespace gamejam2014.Jousting
             }
             if (input.X > bounds.Right)
             {
-                input.X = bounds.Right;
-                if (Velocity.X > 0.0f)
+                if (!WrapAround)
                 {
-                    Velocity = new V2(-Velocity.X * PhysData.BounceEnergyScale, Velocity.Y);
+                    input.X = bounds.Right;
+                    if (Velocity.X > 0.0f)
+                    {
+                        Velocity = new V2(-Velocity.X * PhysData.BounceEnergyScale, Velocity.Y);
+                    }
+                }
+                else
+                {
+                    input.X = bounds.Left;
                 }
 
                 if (OnWallBounce != null)
@@ -180,10 +202,17 @@ namespace gamejam2014.Jousting
             }
             if (input.Y > bounds.Bottom)
             {
-                input.Y = bounds.Bottom;
-                if (Velocity.Y > 0.0f)
+                if (!WrapAround)
                 {
-                    Velocity = new V2(Velocity.X, -Velocity.Y * PhysData.BounceEnergyScale);
+                    input.Y = bounds.Bottom;
+                    if (Velocity.Y > 0.0f)
+                    {
+                        Velocity = new V2(Velocity.X, -Velocity.Y * PhysData.BounceEnergyScale);
+                    }
+                }
+                else
+                {
+                    input.Y = bounds.Top;
                 }
 
                 if (OnWallBounce != null)

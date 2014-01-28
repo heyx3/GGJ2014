@@ -35,8 +35,9 @@ namespace gamejam2014
             HarmonyWin,
             DiscordWin,
         }
-        public States current = States.Playing;
+        public States current = States.MainMenu;
 
+        private Texture2D controls, leftwins, rightwins, logo, title;
 
         public Game1()
         {
@@ -88,6 +89,12 @@ namespace gamejam2014
             graphics.ApplyChanges();
 
             Utilities.OtherFunctions.SetWindowCoords(new Point(0, 0), this, graphics);
+
+            controls = Content.Load<Texture2D>("Art/Front End/controls");
+            leftwins = Content.Load<Texture2D>("Art/Front End/leftwins");
+            rightwins = Content.Load<Texture2D>("Art/Front End/rightwins");
+            logo = Content.Load<Texture2D>("Art/Front End/logo");
+            title = Content.Load<Texture2D>("Art/Front End/titlescreen_a1");
 
             world = new KarmaWorld(GraphicsDevice, Content);
         }
@@ -146,6 +153,7 @@ namespace gamejam2014
                     {
                         if (!buttonDown)
                         {
+                            world = new KarmaWorld(GraphicsDevice, Content);
                             current = States.Playing;
                             buttonDown = true;
                         }
@@ -185,7 +193,7 @@ namespace gamejam2014
                         if (!buttonDown)
                         {
                             current = States.MainMenu;
-                            buttonDown = false;
+                            buttonDown = true;
                         }
                     }
                     else buttonDown = false;
@@ -196,7 +204,7 @@ namespace gamejam2014
                         if (!buttonDown)
                         {
                             current = States.MainMenu;
-                            buttonDown = false;
+                            buttonDown = true;
                         }
                     }
                     else buttonDown = false;
@@ -214,6 +222,8 @@ namespace gamejam2014
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            Rectangle screen = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+
             switch (current)
             {
                 case States.Playing:
@@ -227,6 +237,40 @@ namespace gamejam2014
                     Utilities.Graphics.TexturePrimitiveDrawer.DrawRect(new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), spriteBatch, new Color(0, 0, 0, 128), 1);
                     spriteBatch.DrawString(ArtAssets.WorldFont, "Paused", new Vector2(graphics.PreferredBackBufferWidth * 0.5f, graphics.PreferredBackBufferHeight * 0.5f), Color.White);
                     spriteBatch.End();
+                    break;
+
+                case States.HarmonyWin:
+
+                    world.Draw(gameTime, spriteBatch);
+
+                    spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+                    spriteBatch.Draw(leftwins, screen, new Color(255, 255, 255, 100));
+                    spriteBatch.End();
+                    break;
+
+                case States.DiscordWin:
+
+                    world.Draw(gameTime, spriteBatch);
+
+                    spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+                    spriteBatch.Draw(rightwins, screen, new Color(255, 255, 255, 100));
+                    spriteBatch.End();
+                    break;
+
+                case States.MainMenu:
+
+                    spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+                    spriteBatch.Draw(title, screen, Color.White);
+                    spriteBatch.End();
+
+                    break;
+
+                case States.Instructions:
+
+                    spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+                    spriteBatch.Draw(controls, screen, Color.White);
+                    spriteBatch.End();
+
                     break;
 
                 default: throw new NotImplementedException();

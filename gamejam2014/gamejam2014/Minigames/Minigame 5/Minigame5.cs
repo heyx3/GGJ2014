@@ -72,6 +72,9 @@ namespace gamejam2014.Minigames.Minigame_5
                     AdditiveParticles.Merge(ParticleAssets5.GetPlanetHitParticles((e.Enemy.Pos + Harmony.Pos) * 0.5f,
                                                                                   Utilities.Conversions.GetPerp(UsefulMath.FindDirection(e.Enemy.Pos, Harmony.Pos)), World.CurrentTime));
                 };
+
+            Harmony.WrapAround = true;
+            Dischord.WrapAround = true;
         }
 
         protected override void Update(Jousting.Jouster.CollisionData playerCollision)

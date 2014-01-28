@@ -60,6 +60,7 @@ namespace gamejam2014.Jousting
 
         public float Mass;
         public bool IsAbovePlayer;
+        public bool WrapAround = false;
 
         public event EventHandler<Jousting.Jouster.BounceEventArgs> OnWallBounce;
         public event EventHandler<Jouster.HurtEventArgs> OnHitByJouster;
